@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Oval } from 'react-loader-spinner';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import { Item, IconButton  } from './ContactItemStyled';
-import { Box } from '../Styled/Box';
-import {
-  useDeleteContactByIdMutation
-} from 'redux/contactsSlice';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
+import { Contact, Btn } from './ContactListItem.styled';
+import { Box } from 'components/Box';
+import { useDeleteContactByIdMutation } from 'services/contactsApi';
 import { toast } from 'react-toastify';
 
-export const ContactItem = ({ id, name, number }) => {
+export const ContactListItem = ({ id, name, number, openModal }) => {
   const [deleteContact, { isSuccess, isLoading, isError }] =
     useDeleteContactByIdMutation();
 
@@ -23,14 +22,22 @@ export const ContactItem = ({ id, name, number }) => {
     }
   }, [isSuccess, isError]);
 
-	return (
+  return (
     <>
       <Box display="flex" justifyContent="space-between" gridGap="10px">
-        <Item>
+        <Contact>
           {name}: {number}
-        </Item>
+        </Contact>
         <Box display="flex" gridGap="10px">
-          <IconButton
+          <Btn
+            type="button"
+            onClick={() => {
+              openModal(id);
+            }}
+          >
+            <EditIcon fontSize="small" style={{ color: 'blue' }} />
+          </Btn>
+          <Btn
             type="button"
             onClick={() => deleteContact(id)}
             disabled={isLoading}
@@ -47,17 +54,16 @@ export const ContactItem = ({ id, name, number }) => {
                 strokeWidthSecondary={10}
               />
             ) : (
-              <FaRegTrashAlt color="red" />
+              <DeleteForeverIcon fontSize="small" style={{ color: 'red' }} />
             )}
-          </IconButton>
+          </Btn>
         </Box>
       </Box>
     </>
   );
 };
 
-
-ContactItem.propType = {
+ContactListItem.propType = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,

@@ -1,24 +1,47 @@
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-import  { ContactForm } from "./ContactForm/ContactForm";
-import  { ContactList } from "./ContactsList/ContactsList";
-import  { Filter } from "./FiltrContacts/FiltrContacts";
-import { Container, MainTitle, SubTitle } from "./Styled/App";
+import { lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
+import { SharedLayout } from './SharedLayout/SharedLayout';
 
-
+const HomePage = lazy(() => import('pages/HomePage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage'));
 
 export const App = () => {
-  
-	return (
-		<>
-		<Container>
-			<MainTitle>Phonebook</MainTitle>
-				<ContactForm />
-			<SubTitle>Contacts</SubTitle>
-				<Filter />
-			<ContactList/>
-		</Container>
-		<ToastContainer autoClose={2000} />
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
     </>
-	);
+  );
 };

@@ -16,7 +16,6 @@ export const phonebookSlice = createSlice({
   },
 });
 
-
 export const phonebookReducer = phonebookSlice.reducer;
 
 export const { addFilter } = phonebookSlice.actions;

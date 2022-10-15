@@ -1,12 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { Box } from '../Styled/Box';
+import { Box } from 'components/Box';
 import { Audio } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
-import {
-  useEditContactMutation,
-  useGetContactByIdQuery,
-} from 'redux/contactsSlice';
+import { useEditContactMutation } from 'services/contactsApi';
 import { toast } from 'react-toastify';
 import {
   EditFormWrapper,
@@ -16,10 +13,9 @@ import {
   SubmitBtn,
   Label,
   CloseBtn,
-} from './EditContactStyled';
+} from './EditContact.styled';
 
-export const EditContact = ({ id, closeModal }) => {
-  const { data, isLoading } = useGetContactByIdQuery(id);
+export const EditContact = ({ contactData, closeModal }) => {
   const [editContact, { isLoading: isEditLoading, isSuccess, isError }] =
     useEditContactMutation();
   const {
@@ -28,7 +24,7 @@ export const EditContact = ({ id, closeModal }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = formData => {
-    editContact({ ...data, ...formData });
+    editContact([contactData.id, { ...formData }]);
   };
 
   useEffect(() => {
@@ -45,7 +41,7 @@ export const EditContact = ({ id, closeModal }) => {
   return (
     <EditFormWrapper>
       <CloseBtn onClick={closeModal} />
-      {isLoading || isEditLoading ? (
+      {isEditLoading ? (
         <LoaderContainer>
           <Audio />
         </LoaderContainer>
@@ -55,7 +51,7 @@ export const EditContact = ({ id, closeModal }) => {
           <Label>
             <Box mb={2}>Name</Box>
             <Input
-              defaultValue={data?.name}
+              defaultValue={contactData?.name}
               {...register('name', {
                 required: { value: true, message: 'This field is required' },
                 pattern: {
@@ -74,7 +70,7 @@ export const EditContact = ({ id, closeModal }) => {
           <Label>
             <Box mb={2}>Number</Box>
             <Input
-              defaultValue={data?.number}
+              defaultValue={contactData?.number}
               {...register('number', {
                 required: { value: true, message: 'This field is required' },
                 pattern: {
@@ -98,6 +94,6 @@ export const EditContact = ({ id, closeModal }) => {
 };
 
 EditContact.propType = {
-  id: PropTypes.string.isRequired,
+  contactData: PropTypes.object.isRequired,
   closeModal: PropTypes.func.isRequired,
 };

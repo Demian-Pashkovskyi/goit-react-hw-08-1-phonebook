@@ -3,10 +3,46 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://6339fad6e02b9b64c60b5bb0.mockapi.io',
-  }), 
-  tagTypes: ['Contacts'],
+    baseUrl: 'https://connections-api.herokuapp.com',
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
+  }),
+  tagTypes: ['Contacts', 'User'],
   endpoints: builder => ({
+    register: builder.mutation({
+      query: data => ({
+        url: `/users/signup`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['User', 'Contacts'],
+    }),
+    login: builder.mutation({
+      query: data => ({
+        url: `/users/login`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['User', 'Contacts'],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: `/users/logout`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['User', 'Contacts'],
+    }),
+    fetchCurrentUser: builder.query({
+      query: () => `/users/current`,
+      providesTags: ['User'],
+    }),
     getContacts: builder.query({
       query: () => `/contacts`,
       providesTags: ['Contacts'],
@@ -24,9 +60,9 @@ export const contactsApi = createApi({
       invalidatesTags: ['Contacts'],
     }),
     editContact: builder.mutation({
-      query: data => ({
-        url: `/contacts/${data.id}`,
-        method: 'PUT',
+      query: ([id, data]) => ({
+        url: `/contacts/${id}`,
+        method: 'PATCH',
         body: data,
       }),
       invalidatesTags: ['Contacts'],
@@ -42,6 +78,10 @@ export const contactsApi = createApi({
 });
 
 export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useFetchCurrentUserQuery,
   useGetContactsQuery,
   useGetContactByIdQuery,
   useDeleteContactByIdMutation,
