@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Oval } from 'react-loader-spinner';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import { Contact, Btn } from './ContactListItem.styled';
+import { Item, IconButton } from './ContactItemStyled';
 import { Box } from 'components/Box';
-import { useDeleteContactByIdMutation } from 'services/contactsApi';
+import { useDeleteContactByIdMutation } from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
 
 export const ContactListItem = ({ id, name, number, openModal }) => {
@@ -25,19 +25,19 @@ export const ContactListItem = ({ id, name, number, openModal }) => {
   return (
     <>
       <Box display="flex" justifyContent="space-between" gridGap="10px">
-        <Contact>
+        <Item>
           {name}: {number}
-        </Contact>
+        </Item>
         <Box display="flex" gridGap="10px">
-          <Btn
+          <IconButton
             type="button"
             onClick={() => {
               openModal(id);
             }}
           >
             <EditIcon fontSize="small" style={{ color: 'blue' }} />
-          </Btn>
-          <Btn
+          </IconButton>
+          <IconButton
             type="button"
             onClick={() => deleteContact(id)}
             disabled={isLoading}
@@ -56,7 +56,7 @@ export const ContactListItem = ({ id, name, number, openModal }) => {
             ) : (
               <DeleteForeverIcon fontSize="small" style={{ color: 'red' }} />
             )}
-          </Btn>
+          </IconButton>
         </Box>
       </Box>
     </>

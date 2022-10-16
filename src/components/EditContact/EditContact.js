@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Box } from 'components/Box';
 import { Audio } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
-import { useEditContactMutation } from 'services/contactsApi';
+import { useEditContactMutation } from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
 import {
   EditFormWrapper,
@@ -13,7 +13,7 @@ import {
   SubmitBtn,
   Label,
   CloseBtn,
-} from './EditContact.styled';
+} from './EditContactStyled';
 
 export const EditContact = ({ contactData, closeModal }) => {
   const [editContact, { isLoading: isEditLoading, isSuccess, isError }] =

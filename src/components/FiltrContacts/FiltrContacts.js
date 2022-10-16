@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { addFilter, selectContactsFilter } from 'redux/AppSlice';
-import { Label } from './FiltrContactsStyled';
+import { LabelForm, FilterInput, FilterWrapper } from './FiltrContactsStyled';
 
 export const Filter = () => {
   const { control } = useForm();
@@ -12,20 +12,19 @@ export const Filter = () => {
   };
 
   return (
-    <>
-      <form>
-        <Label>
-          <span>Find contacts by name</span>
-          <Controller
-            render={({ field }) => (
-              <input {...field} onChange={onInputChange} value={filter} />
-            )}
-            name="filter"
-            control={control}
-            defaultValue=""
-          />
-        </Label>
-      </form>
-    </>
-  );
-};
+		<FilterWrapper>
+				<LabelForm>
+					<span>Find contacts by name</span>
+					<Controller
+						render={({ field }) => (
+							<FilterInput {...field} onChange={onInputChange} 
+							value={filter} />
+						)}
+						name="filter"
+						control={control}
+						defaultValue=""
+					/>
+				</LabelForm>
+			</FilterWrapper>
+		);
+	};

@@ -6,7 +6,7 @@ import { Audio } from 'react-loader-spinner';
 import { Modal } from 'components/Modal/Modal';
 import { EditContact } from 'components/EditContact/EditContact';
 import { ContactListItem } from 'components/ContactItem/ContactItem'
-import { Contacts, Wrapper } from './ContactsListStyled';
+import { List, Wrapper } from './ContactsListStyled';
 
 export const ContactList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +30,7 @@ export const ContactList = () => {
 
   return (
     <>
-      <Contacts>
+      <List>
         {isFetching && (
           <Wrapper>
             <Audio
@@ -55,7 +55,7 @@ export const ContactList = () => {
         ) : (
           <li>No contacts</li>
         )}
-      </Contacts>
+      </List>
       {isModalOpen && (
         <Modal closeModal={closeModal}>
           <EditContact contactData={contactData} closeModal={closeModal} />

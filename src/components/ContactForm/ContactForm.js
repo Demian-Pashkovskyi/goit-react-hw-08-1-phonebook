@@ -5,9 +5,8 @@ import {
   useGetContactsQuery,
 } from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
-import { Audio } from 'react-loader-spinner';
 import { Button } from '@mui/material';
-import { Label, FormBox, Error, Wrapper } from './ContactFormStyled';
+import { LabelForm , AddForm , Error, InputForm } from './ContactFormStyled';
 
 export const ContactForm = () => {
   const { data: contacts } = useGetContactsQuery();
@@ -59,15 +58,11 @@ export const ContactForm = () => {
   }, [isSuccess, isError]);
 
   return (
-    <FormBox onSubmit={handleSubmit(onFormSubmit)} autoComplete="off">
-      {isLoading && (
-        <Wrapper>
-          <Audio color="#61dafb" />
-        </Wrapper>
-      )}
-      <Label>
+    <AddForm  onSubmit={handleSubmit(onFormSubmit)} autoComplete="off">
+      {isLoading}
+      <LabelForm >
         <span>Name</span>
-        <input
+        <InputForm
           placeholder="John"
           value={nameValue}
           type="text"
@@ -82,10 +77,10 @@ export const ContactForm = () => {
           })}
         />
         {errors.name?.message && <Error>{errors.name?.message}</Error>}
-      </Label>
-      <Label>
+      </LabelForm>
+      <LabelForm >
         <span>Number</span>
-        <input
+        <InputForm
           placeholder="1234567890"
           value={numberValue}
           {...register('number', {
@@ -100,10 +95,10 @@ export const ContactForm = () => {
           type="tel"
         />
         {errors.number?.message && <Error>{errors.number?.message}</Error>}
-      </Label>
+      </LabelForm>
       <Button type="submit" variant="contained">
         Add contact
       </Button>
-    </FormBox>
+    </AddForm >
   );
 };
