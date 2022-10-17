@@ -4,7 +4,7 @@ import { Oval } from 'react-loader-spinner';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 import { Item, IconButton } from './ContactItemStyled';
-import { Box } from 'components/Box';
+import { Box } from '../Styled/Box';
 import { useDeleteContactByIdMutation } from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
 

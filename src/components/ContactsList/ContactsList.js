@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectContactsFilter } from 'redux/AppSlice';
-import { useGetContactsQuery } from 'services/contactsApi';
+import { useGetContactsQuery } from 'redux/contactsSlice';
 import { Audio } from 'react-loader-spinner';
 import { Modal } from 'components/Modal/Modal';
 import { EditContact } from 'components/EditContact/EditContact';

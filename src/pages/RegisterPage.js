@@ -1,60 +1,40 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useCreateNewUserMutation } from 'redux/contactsSlice';
-import { useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { addUserData } from 'redux/AuthSlice';
-import { useDispatch } from 'react-redux';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormHelperText,
+  Link,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { Router } from 'react-router-dom';
 
 const RegistrationPage = () => {
-  const [createUser, { data, isSuccess, isError }] = useCreateNewUserMutation();
-  const dispatch = useDispatch();
-  const {
-    handleSubmit,
-    touched,
-    errors,
-    handleBlur,
-    handleChange,
-    values,
-    isSubmitting,
-    setSubmitting,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: {
-      name: '',
       email: '',
+      firstName: '',
+      lastName: '',
       password: '',
+      policy: false,
     },
     validationSchema: Yup.object({
-      name: Yup.string().max(255).required('First name is required'),
       email: Yup.string()
         .email('Must be a valid email')
         .max(255)
         .required('Email is required'),
+      firstName: Yup.string().max(255).required('First name is required'),
+      lastName: Yup.string().max(255).required('Last name is required'),
       password: Yup.string().max(255).required('Password is required'),
+      policy: Yup.boolean().oneOf([true], 'This field must be checked'),
     }),
-    onSubmit: ({ name, email, password }) => {
-      createUser({
-        name,
-        email,
-        password,
-      });
+    onSubmit: () => {
+      Router.push('/').catch(console.error);
     },
   });
-
-  useEffect(() => {
-    if (isSuccess || isError) setSubmitting(false);
-
-    if (isSuccess) {
-      toast.success('User created');
-      dispatch(addUserData(data));
-    }
-
-    if (isError) {
-      toast.error('Something went wrong. Try again.');
-    }
-  }, [data, dispatch, isError, isSuccess, setSubmitting]);
 
   return (
     <Box
@@ -67,7 +47,7 @@ const RegistrationPage = () => {
       }}
     >
       <Container maxWidth="sm">
-        <form onSubmit={handleSubmit}>
+				<form onSubmit={formik.handleSubmit}>
           <Box sx={{ my: 3 }}>
             <Typography color="textPrimary" variant="h4">
               Create a new account
@@ -77,47 +57,82 @@ const RegistrationPage = () => {
             </Typography>
           </Box>
           <TextField
-            error={Boolean(touched.name && errors.name)}
+            error={Boolean(formik.touched.firstName && formik.errors.firstName)}
             fullWidth
-            helperText={touched.name && errors.name}
-            label="Name"
+            helperText={formik.touched.firstName && formik.errors.firstName}
+            label="First Name"
             margin="normal"
-            name="name"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.name}
+            name="firstName"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.firstName}
             variant="outlined"
           />
           <TextField
-            error={Boolean(touched.email && errors.email)}
+            error={Boolean(formik.touched.lastName && formik.errors.lastName)}
             fullWidth
-            helperText={touched.email && errors.email}
+            helperText={formik.touched.lastName && formik.errors.lastName}
+            label="Last Name"
+            margin="normal"
+            name="lastName"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.lastName}
+            variant="outlined"
+          />
+          <TextField
+            error={Boolean(formik.touched.email && formik.errors.email)}
+            fullWidth
+            helperText={formik.touched.email && formik.errors.email}
             label="Email Address"
             margin="normal"
             name="email"
-            onBlur={handleBlur}
-            onChange={handleChange}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
             type="email"
-            value={values.email}
+            value={formik.values.email}
             variant="outlined"
           />
           <TextField
-            error={Boolean(touched.password && errors.password)}
+            error={Boolean(formik.touched.password && formik.errors.password)}
             fullWidth
-            helperText={touched.password && errors.password}
+            helperText={formik.touched.password && formik.errors.password}
             label="Password"
             margin="normal"
             name="password"
-            onBlur={handleBlur}
-            onChange={handleChange}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
             type="password"
-            value={values.password}
+            value={formik.values.password}
             variant="outlined"
           />
+          <Box
+            sx={{
+              alignItems: 'center',
+              display: 'flex',
+              ml: -1,
+            }}
+          >
+            <Checkbox
+              checked={formik.values.policy}
+              name="policy"
+              onChange={formik.handleChange}
+            />
+            <Typography color="textSecondary" variant="body2">
+              I have read the {/* <NavLink to="/"> */}
+              <Link color="primary" underline="always" variant="subtitle2">
+                Terms and Conditions
+              </Link>
+              {/* </NavLink> */}
+            </Typography>
+          </Box>
+          {Boolean(formik.touched.policy && formik.errors.policy) && (
+            <FormHelperText error>{formik.errors.policy}</FormHelperText>
+          )}
           <Box sx={{ py: 2 }}>
             <Button
               color="primary"
-              disabled={isSubmitting}
+              disabled={formik.isSubmitting}
               fullWidth
               size="large"
               type="submit"
@@ -127,7 +142,11 @@ const RegistrationPage = () => {
             </Button>
           </Box>
           <Typography color="textSecondary" variant="body2">
-            Have an account? <Link to="/login">Sign In</Link>
+            Have an account? {/* <NavLink to="/login"> */}
+            <Link variant="subtitle2" underline="hover">
+              Sign In
+            </Link>
+            {/* </NavLink> */}
           </Typography>
         </form>
       </Container>
