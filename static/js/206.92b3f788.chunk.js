@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[206],{1206:function(e,c,t){t.r(c);var n=t(5228),o=t(184);c.default=function(){return(0,o.jsx)(n.x,{p:5,children:(0,o.jsx)("div",{className:"elfsight-app-9467e218-08b1-46e4-b45c-45e825cc4d54"})})}}}]);
-//# sourceMappingURL=206.92b3f788.chunk.js.map
