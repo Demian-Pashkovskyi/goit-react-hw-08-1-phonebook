@@ -1,4 +1,4 @@
-import { Box } from '../components/Styled/Box';
+import { Box } from 'components/Styled/Box';
 
 const HomePage = () => {
   return (

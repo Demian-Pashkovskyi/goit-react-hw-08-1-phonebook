@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { phonebookReducer } from 'redux/AppSlice';
 import { authReducer } from 'redux/auth/auth-slice';
-import { contactsApi } from 'redux/contactsSlice';
+import { contactsApi } from 'services/contactsApi';
 
 const authPersistConfig = {
   key: 'auth',

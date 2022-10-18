@@ -24,6 +24,5 @@ export const FilterInput = styled.input`
 `;
 
 export const FilterWrapper = styled.div`
-	width: 240px;
 	margin-bottom: 20px;
 `;

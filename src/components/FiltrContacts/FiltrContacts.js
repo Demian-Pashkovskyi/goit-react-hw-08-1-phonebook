@@ -11,7 +11,7 @@ export const Filter = () => {
     dispatch(addFilter(evt.target.value));
   };
 
-  return (
+	return (
 		<FilterWrapper>
 				<LabelForm>
 					<span>Find contacts by name</span>

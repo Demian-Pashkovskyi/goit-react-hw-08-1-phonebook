@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
-import { Box } from '../Styled/Box';
+import { Box } from 'components/Styled/Box';
 import { Audio } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
-import { useEditContactMutation } from 'redux/contactsSlice';
+import { useEditContactMutation } from 'services/contactsApi';
 import { toast } from 'react-toastify';
 import {
   EditFormWrapper,

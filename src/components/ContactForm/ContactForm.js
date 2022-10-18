@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import {
   useCreateContactMutation,
   useGetContactsQuery,
-} from 'redux/contactsSlice';
+} from 'services/contactsApi';
 import { toast } from 'react-toastify';
 import { Button } from '@mui/material';
 import { LabelForm , AddForm , Error, InputForm } from './ContactFormStyled';

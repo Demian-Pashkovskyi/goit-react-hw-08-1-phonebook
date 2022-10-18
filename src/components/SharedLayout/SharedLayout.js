@@ -6,7 +6,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Link } from './SharedLayoutStyled';
-import { GlobalStyle } from '../Styled/GlobalStyle';
+import { GlobalStyle } from 'components/Styled/GlobalStyle';
 import Container from '@mui/material/Container';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { AuthNav } from 'components/AuthNav/AuthNav';

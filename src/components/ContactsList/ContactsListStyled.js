@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 // import { font } from "../Styled/Mixins";
 
-export const List = styled.ul`
+export const Contacts = styled.ul`
 display: flex;
   position: relative;
   flex-direction: column;

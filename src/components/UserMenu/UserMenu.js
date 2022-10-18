@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { Box } from '../Styled/Box';
+import { Box } from 'components/Styled/Box';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser, removeUserData } from 'redux/auth/auth-slice';
@@ -8,8 +8,8 @@ import {
   selectToken,
   selectUser,
 } from 'redux/auth/auth-selectors';
-import { useLogoutMutation } from 'redux/contactsSlice';
-import { useFetchCurrentUserQuery } from 'redux/contactsSlice';
+import { useLogoutMutation } from 'services/contactsApi';
+import { useFetchCurrentUserQuery } from 'services/contactsApi';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();

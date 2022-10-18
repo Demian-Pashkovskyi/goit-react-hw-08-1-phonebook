@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { FaRegWindowClose } from 'react-icons/fa';
 
 export const EditFormWrapper = styled.div`
