@@ -15,7 +15,8 @@ import {
   CloseBtn,
 } from './EditContactStyled';
 
-export const EditContact = ({ contactData, closeModal }) => {
+export const EditContact = ({ id, closeModal }) => {
+  const { data, isLoading } = useGetContactByIdQuery(id);
   const [editContact, { isLoading: isEditLoading, isSuccess, isError }] =
     useEditContactMutation();
   const {
@@ -41,7 +42,7 @@ export const EditContact = ({ contactData, closeModal }) => {
   return (
     <EditFormWrapper>
       <CloseBtn onClick={closeModal} />
-      {isEditLoading ? (
+      {isLoading || isEditLoading ? (
         <LoaderContainer>
           <Audio />
         </LoaderContainer>
@@ -51,7 +52,7 @@ export const EditContact = ({ contactData, closeModal }) => {
           <Label>
             <Box mb={2}>Name</Box>
             <Input
-              defaultValue={contactData?.name}
+              defaultValue={data?.name}
               {...register('name', {
                 required: { value: true, message: 'This field is required' },
                 pattern: {
@@ -70,7 +71,7 @@ export const EditContact = ({ contactData, closeModal }) => {
           <Label>
             <Box mb={2}>Number</Box>
             <Input
-              defaultValue={contactData?.number}
+              defaultValue={data?.number}
               {...register('number', {
                 required: { value: true, message: 'This field is required' },
                 pattern: {
@@ -94,6 +95,6 @@ export const EditContact = ({ contactData, closeModal }) => {
 };
 
 EditContact.propType = {
-  contactData: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
-};
+}
