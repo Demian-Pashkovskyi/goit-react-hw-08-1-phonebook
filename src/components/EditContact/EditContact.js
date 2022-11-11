@@ -24,7 +24,7 @@ export const EditContact = ({ contactData, closeModal }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = formData => {
-    editContact([contactData.id, { ...formData }]);
+    editContact({ ...data, ...formData });
   };
 
   useEffect(() => {
