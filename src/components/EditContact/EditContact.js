@@ -98,3 +98,4 @@ EditContact.propType = {
   id: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
 }
+
