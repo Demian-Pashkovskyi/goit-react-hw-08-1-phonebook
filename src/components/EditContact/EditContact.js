@@ -3,7 +3,10 @@ import { useEffect } from 'react';
 import { Box } from 'components/Styled/Box';
 import { Audio } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
-import { useEditContactMutation } from 'services/contactsApi';
+import {
+  useEditContactMutation,
+  useGetContactByIdQuery,
+} from 'services/contactsApi';
 import { toast } from 'react-toastify';
 import {
   EditFormWrapper,
@@ -97,5 +100,4 @@ export const EditContact = ({ id, closeModal }) => {
 EditContact.propType = {
   id: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
-}
-
+};
