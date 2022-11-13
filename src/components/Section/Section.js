@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { Box } from '../Styled/Box';
-import { SectionHeading } from './SectionStyled';
+import { Box } from 'components/Box';
+import { SectionHeading } from './Section.styled';
 
 export const Section = ({ title, children }) => (
   <Box

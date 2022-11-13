@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Oval } from 'react-loader-spinner';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-import { Contact, Btn } from './ContactItemStyled';
-import { Box } from 'components/Styled/Box';
+import { Contact, Btn } from './ContactListItem.styled';
+import { Box } from 'components/Box';
 import { useDeleteContactByIdMutation } from 'services/contactsApi';
 import { toast } from 'react-toastify';
 

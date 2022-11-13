@@ -7,7 +7,7 @@ import {
 import { toast } from 'react-toastify';
 import { Audio } from 'react-loader-spinner';
 import { Button } from '@mui/material';
-import { Label, FormBox, Error, Wrapper } from './ContactFormStyled';
+import { Label, FormBox, Error, Wrapper } from './ContactForm.styled';
 
 export const ContactForm = () => {
   const { data: contacts } = useGetContactsQuery();

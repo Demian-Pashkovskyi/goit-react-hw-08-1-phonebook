@@ -5,8 +5,8 @@ import { useGetContactsQuery } from 'services/contactsApi';
 import { Audio } from 'react-loader-spinner';
 import { Modal } from 'components/Modal/Modal';
 import { EditContact } from 'components/EditContact/EditContact';
-import { ContactListItem } from 'components/ContactItem/ContactItem';
-import { Contacts, Wrapper } from './ContactsListStyled';
+import { ContactListItem } from './components/ContactListItem';
+import { Contacts, Wrapper } from './ContactList.styled';
 
 export const ContactList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

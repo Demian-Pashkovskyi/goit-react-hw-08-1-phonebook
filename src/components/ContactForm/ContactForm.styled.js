@@ -28,4 +28,4 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: #808080e3;
-`;	
+`;

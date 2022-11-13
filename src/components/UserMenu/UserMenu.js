@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { Box } from 'components/Styled/Box';
+import { Box } from 'components/Box';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser, removeUserData } from 'redux/auth/auth-slice';
