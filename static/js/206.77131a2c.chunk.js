@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[206],{1206:function(e,t,c){c.r(t);var a=c(4834),r=c(184);t.default=function(){return(0,r.jsx)(a.x,{p:5,children:(0,r.jsx)("div",{className:"elfsight-app-9467e218-08b1-46e4-b45c-45e825cc4d54"})})}}}]);
+//# sourceMappingURL=206.77131a2c.chunk.js.map
